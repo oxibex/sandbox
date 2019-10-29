@@ -1,4 +1,4 @@
-package sandbox.springboot.listeners;
+package com.sandbox.springboot.listeners;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

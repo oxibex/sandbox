@@ -1,4 +1,4 @@
-package sandbox.linear;
+package com.sandbox.linear;
 
 
 import org.apache.commons.math3.optim.PointValuePair;
