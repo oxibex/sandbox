@@ -1,2 +1,45 @@
+---
 server:
   port: 8761
+spring:
+  profiles: default
+  application:
+    name: eureka-cluster
+eureka:
+  instance:
+    hostname: server.com
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://ru-server.ru:8762/eureka/,http://en-server.com:8763/eureka/
+---
+server:
+  port: 8762
+spring:
+  profiles: ru-server
+  application:
+    name: eureka-cluster
+eureka:
+  instance:
+    hostname: ru-server.ru
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://server.com:8761/eureka/,http://en-server.ru.com:8763/eureka/
+---
+server:
+  port: 8763
+spring:
+  profiles: en-server
+  application:
+    name: eureka-cluster
+eureka:
+  instance:
+    hostname: en-server.com
+  client:
+     register-with-eureka: true
+     fetch-registry: true
+     serviceUrl:
+       defaultZone: http://server.com:8761/eureka/,http://ru-server.ru.com:8762/eureka/
