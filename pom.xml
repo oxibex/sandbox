@@ -13,6 +13,7 @@
         <module>microservice</module>
         <module>springboot-examples</module>
         <module>math</module>
+        <module>pattern</module>
     </modules>
 
     <properties>
