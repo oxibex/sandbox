@@ -1,0 +1,7 @@
+smtp:
+  host: smtp-relay.gmail.com
+  port: 587
+  auth: false
+mail:
+  value: noreply@example.com
+  login: noreply@example.com
