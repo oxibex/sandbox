@@ -8,6 +8,8 @@ spring:
 eureka:
   instance:
     hostname: server.com
+  server:
+    enable-self-preservation: false
   client:
     register-with-eureka: true
     fetch-registry: true

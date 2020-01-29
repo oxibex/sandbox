@@ -3,4 +3,5 @@
 sandbox.iml
 /springboot-emaples/springboot-emaples.iml
 /microservice/eureka-server/eureka-server.iml
+/microservice/eureka-client/eureka-client.iml
 /microservice/microservice.iml

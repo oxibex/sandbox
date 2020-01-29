@@ -1,3 +1,6 @@
+spring:
+  main:
+    banner-mode: off
 smtp:
   host: smtp-relay.gmail.com
   port: 587
