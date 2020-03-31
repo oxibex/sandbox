@@ -15,6 +15,7 @@
         <module>math</module>
         <module>pattern</module>
         <module>springboot-web</module>
+        <module>spring-web-socket</module>
     </modules>
 
     <properties>
