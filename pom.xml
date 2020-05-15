@@ -16,6 +16,8 @@
         <module>pattern</module>
         <module>springboot-web</module>
         <module>spring-web-socket</module>
+        <module>multitasking</module>
+        <module>springboot-db</module>
     </modules>
 
     <properties>

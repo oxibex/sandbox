@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    username: dbuser
+    password: dbuser
+    url: jdbc:postgresql://localhost:5432/testdb
+  flyway:
+    user: dbuser
+    password: dbuser
+    schemas: public
