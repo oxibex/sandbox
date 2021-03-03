@@ -18,18 +18,19 @@
         <module>spring-web-socket</module>
         <module>multitasking</module>
         <module>springboot-db</module>
+        <module>spring</module>
     </modules>
 
     <properties>
         <math3.version>3.6.1</math3.version>
         <lombok.vresion>1.18.10</lombok.vresion>
-        <spring.boot.version>2.2.0.RELEASE</spring.boot.version>
+        <spring.boot.version>2.4.3</spring.boot.version>
     </properties>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.0.RELEASE</version>
+        <version>2.4.3</version>
     </parent>
 
     <dependencies>
