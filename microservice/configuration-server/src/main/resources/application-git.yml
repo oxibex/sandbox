@@ -1,0 +1,10 @@
+server:
+  port: 8888
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///E:/project/sandbox/microservice/configuration
+  application:
+    name: config-server
