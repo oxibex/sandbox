@@ -6,6 +6,7 @@ import microservice.dto.ServiceDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@RequestMapping("/api")
 public class EurekaController {
 
     @Value("${test.property}")
@@ -30,7 +32,7 @@ public class EurekaController {
         log.info("Test property from congif server {}", this.testProperty);
     }
 
-    @RequestMapping(path = "services")
+    @GetMapping(path = "/services")
     public List<ServiceDto> getAvailableClients() {
         List<String> services = discoveryClient.getServices();
         List<ServiceDto> res = new ArrayList<>();
