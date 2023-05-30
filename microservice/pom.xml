@@ -26,6 +26,8 @@
     <modules>
         <module>eureka-server</module>
         <module>test-service</module>
+        <module>test-producer</module>
+        <module>test-consumer</module>
         <module>configuration-server</module>
         <module>gateway</module>
     </modules>

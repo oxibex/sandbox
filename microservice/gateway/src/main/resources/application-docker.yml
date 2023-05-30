@@ -12,6 +12,18 @@ spring:
             - Path=/test-service/**
           filters:
             - StripPrefix=1
+        - id: test_producer
+          uri: lb://TEST-PRODUCER
+          predicates:
+            - Path=/test-producer/**
+          filters:
+            - StripPrefix=1
+        - id: test_consumer
+          uri: lb://TEST-CONSUMER
+          predicates:
+            - Path=/test-consumer/**
+          filters:
+            - StripPrefix=1
 
 eureka:
   client:

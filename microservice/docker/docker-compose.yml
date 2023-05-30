@@ -50,5 +50,50 @@ services:
       config-server:
         condition: service_healthy
 
+  test-producer:
+    image: com.sandbox.microservice.test-producer:1.0-SNAPSHOT
+    networks:
+      - test-network
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+
+  test-consumer:
+    image: com.sandbox.microservice.test-consumer:1.0-SNAPSHOT
+    networks:
+      - test-network
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+
+  kafka:
+    image: bitnami/kafka:3.4
+    ports:
+      - "9092:9092"
+    networks:
+      - test-network
+    depends_on:
+      - zookeeper
+    environment:
+      ALLOW_PLAINTEXT_LISTENER: 'yes'
+      KAFKA_ENABLE_KRAFT: 'no'
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
+      BITNAMI_DEBUG: "true"
+
+  zookeeper:
+    image: zookeeper:3.8.1
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - test-network
+
 networks:
   test-network:
