@@ -12,6 +12,9 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    depends_on:
+      logstash:
+        condition: service_healthy
     networks:
       - test-network
 
@@ -25,6 +28,9 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    depends_on:
+      logstash:
+        condition: service_healthy
     networks:
       - test-network
 
@@ -33,6 +39,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
+      logstash:
+        condition: service_healthy
       eureka-server:
         condition: service_healthy
       config-server:
@@ -45,6 +53,8 @@ services:
     networks:
       - test-network
     depends_on:
+      logstash:
+        condition: service_healthy
       eureka-server:
         condition: service_healthy
       config-server:
@@ -55,6 +65,8 @@ services:
     networks:
       - test-network
     depends_on:
+      logstash:
+        condition: service_healthy
       eureka-server:
         condition: service_healthy
       config-server:
@@ -65,6 +77,8 @@ services:
     networks:
       - test-network
     depends_on:
+      logstash:
+        condition: service_healthy
       eureka-server:
         condition: service_healthy
       config-server:
@@ -95,5 +109,65 @@ services:
     networks:
       - test-network
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELK_VERSION}
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+     ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
+     node.name: elastic_node_test
+     discovery.type: single-node
+    volumes:
+      - ./elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,Z
+      - elasticsearch:/usr/share/elasticsearch/data:Z
+    networks:
+      - test-network
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:${ELK_VERSION}
+    environment:
+      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}
+    healthcheck:
+      test: bin/logstash -t
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
+    networks:
+      - test-network
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:${ELK_VERSION}
+    environment:
+      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+    ports:
+      - "5601:5601"
+    volumes:
+      - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
+    networks:
+      - test-network
+    depends_on:
+      - elasticsearch
+
+#  Don't user filebeat. Use logstash-logback-encoder instead for directly sending into logstash
+#
+#  filebeat:
+#    image: docker.elastic.co/beats/filebeat:${ELK_VERSION}
+#    command: filebeat -e -strict.perms=false
+#    volumes:
+#      - ./logs/:/usr/share/filebeat/my_logs/
+#      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+#      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+#      - /var/run/docker.sock:/var/run/docker.sock:ro
+#    networks:
+#      - test-network
+
 networks:
   test-network:
+volumes:
+  elasticsearch:
