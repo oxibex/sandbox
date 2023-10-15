@@ -1,0 +1,1 @@
+docker build -t com.sandbox.redis-message-consumer .

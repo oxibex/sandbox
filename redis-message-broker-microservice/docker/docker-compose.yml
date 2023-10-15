@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  redis:
+    image: 'redis:7-alpine'
+    volumes:
+      - "./redis.conf:/usr/local/etc/redis/redis.conf:ro"
+    ports:
+      - "6379:6379"
+    command: redis-server /usr/local/etc/redis/redis.conf
+
+  consumer:
+    image: 'com.sandbox.redis-message-consumer'
+    deploy:
+      mode: replicated
+      replicas: 3
+    depends_on:
+      - redis
+
+  producer:
+    image: 'com.sandbox.node-message-producer'
+    depends_on:
+      - redis
+
+

@@ -1,0 +1,1 @@
+docker build -t com.sandbox.node-message-producer .
