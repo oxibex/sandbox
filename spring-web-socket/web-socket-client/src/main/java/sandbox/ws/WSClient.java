@@ -14,7 +14,7 @@ import java.util.TimerTask;
 @Slf4j
 public class WSClient {
 
-    private static final int TIMER_DELAY =0;
+    private static final int TIMER_DELAY = 0;
     private static final int TIMER_REPEAT = 10000;
 
     public WSClient(String token) {
@@ -29,7 +29,7 @@ public class WSClient {
 
                     @Override
                     protected void handleTextMessage(WebSocketSession session, TextMessage message) {
-                        log.info("receive message {}" + message.getPayload());
+                        log.info("receive message {}", message.getPayload());
                     }
                 },
                 "ws://debug.local/ws/web?token=" + token);
@@ -42,7 +42,7 @@ public class WSClient {
             @Override
             public void run() {
                 try {
-                    log.info("Send message at session {} " + session.getId());
+                    log.info("Send message at session {} ", session.getId());
                     session.sendMessage(new TextMessage("X"));
                 } catch (IOException e) {
                     log.error(e.toString());

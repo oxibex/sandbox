@@ -11,6 +11,10 @@
     <artifactId>eureka-server</artifactId>
     <name>eureka-server</name>
 
+    <properties>
+        <start-class>com.sandbox.microservice.eureka.EurekaServerApplication</start-class>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -29,6 +33,17 @@
     <build>
         <finalName>application</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>

@@ -1,9 +1,8 @@
 package sandbox.ws;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import sandbox.ws.service.WSService;
-
-import javax.annotation.PostConstruct;
 
 public class StressTest {
 

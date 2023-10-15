@@ -9,11 +9,13 @@ import org.apache.commons.math3.optim.linear.NonNegativeConstraint;
 import org.apache.commons.math3.optim.linear.Relationship;
 import org.apache.commons.math3.optim.linear.SimplexSolver;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * oxibex@gmail.com
@@ -39,9 +41,9 @@ public class LinearTest {
                         GoalType.MAXIMIZE,
                         new NonNegativeConstraint(true)
                 );
-        Assert.assertEquals(solution.getPoint()[0], 0, 0);
-        Assert.assertEquals(solution.getPoint()[1], 220, 0);
-        Assert.assertEquals(solution.getPoint()[2], 70, 0);
+        assertEquals(solution.getPoint()[0], 0, 0);
+        assertEquals(solution.getPoint()[1], 220, 0);
+        assertEquals(solution.getPoint()[2], 70, 0);
     }
 
 }

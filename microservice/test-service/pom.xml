@@ -10,7 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>test-service</artifactId>
-    <name>test-client</name>
+    <name>test-service</name>
+
+    <properties>
+        <start-class>com.sandbox.microservice.service.TestServiceApplication</start-class>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -39,10 +43,22 @@
         <finalName>application</finalName>
         <plugins>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
+
 
 </project>
