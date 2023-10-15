@@ -7,6 +7,8 @@ COPY package*.json ./
 RUN npm install
 
 COPY ./src .
+RUN touch .env
+RUN echo REDIS_HOST=redis >> .env
 
 EXPOSE 8080
 
