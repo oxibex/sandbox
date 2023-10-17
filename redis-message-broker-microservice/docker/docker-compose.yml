@@ -22,4 +22,15 @@ services:
     depends_on:
       - redis
 
+  consul:
+    image: hashicorp/consul:1.16
+    ports:
+      - "8500:8500"
+
+  prometeus:
+    image: 'prom/prometheus:v2.47.2'
+    volumes:
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml:ro"
+    ports:
+      - "9090:9090"
 

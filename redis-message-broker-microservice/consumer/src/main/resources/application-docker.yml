@@ -3,3 +3,17 @@ spring:
     redis:
       host: redis
       port: 6379
+  cloud:
+    consul:
+      discovery:
+        instance-id: ${spring.application.name}:${random.value}
+      host: consul
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus,loggers
+  endpoint:
+    info:
+      enabled: true

@@ -1,5 +1,21 @@
+
 spring:
+  application:
+    name: consumer
   data:
     redis:
       host: localhost
       port: 6379
+  cloud:
+    consul:
+      discovery:
+        instance-id: ${spring.application.name}:${random.value}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus,loggers
+  endpoint:
+    info:
+      enabled: true
